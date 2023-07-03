@@ -1,0 +1,52 @@
+env:
+  # Telegram
+  TG_CHAT: "@theunknownname06"
+  TG_TOKEN: ENCRYPTED[983bbf1090f7d681f2264c0b7e41d6c448cab2f353f5518567002535f7cf1d117a7ce8f998f5f52664d7a489d4c15aec]
+
+  # Gitlab
+  PUSH_TO_GITLAB: true
+  GITLAB_GROUP: TheUnknownName06
+  GITLAB_TOKEN: ENCRYPTED[4edb7773d21bd9356bde7b03cf230a2757daaa6319f3f6213d4b717390e499743a2445e042e8b78df4edaa52d14ee35c]
+  GITLAB_INSTANCE: gitlab.com
+
+  # Private SSH Key
+  PRIV_SSH_KEY: ENCRYPTED[95fc732300e9805bbcb4fba0687d0c29c3f7352c45b1d1aa6948bcc403598667d1f9777319da6de5351a8b10387b3a10]
+
+task:
+  name: "Firmware Dump by DumprX x DumpYara"
+
+  skip: $CIRRUS_BRANCH == 'main'
+  auto_cancellation: $CIRRUS_BRANCH == 'autocancel'
+  timeout_in: 120m
+  container:
+      image: ghcr.io/tunbudi06/docker:arch
+      privileged: true
+      cpu: 4
+      memory: 16G
+
+  #Clone_script:
+    #  - git clone --depth=1 --single-branch https://github.com/DumprX/DumprX.git ~/DumprX
+  
+  Set-SSH-Keys_script:
+      - mkdir -p ~/.ssh
+      - ssh-keyscan -H github.com >> ~/.ssh/known_hosts
+      - ssh-keyscan -H gitlab.com >> ~/.ssh/known_hosts
+      - ssh-keyscan -H "${GITLAB_INSTANCE}" >> ~/.ssh/known_hosts
+      - echo "${PRIV_SSH_KEY}" > ~/.ssh/id_ed25519
+      - chmod 600 ~/.ssh/id_ed25519
+
+  Setup_script:
+      - git config --global user.name "TUNBudi06"
+      - git config --global user.email "anjaytun2006@gmail.com"
+      - git config --global color.ui auto
+      - cd ${CIRRUS_WORKING_DIR}/yara
+      - echo "${GITLAB_TOKEN}" > .gitlab_token
+      - echo "${GITLAB_GROUP}" > .gitlab_group
+      - echo "${TG_CHAT}" > .tg_chat
+      - echo "${TG_TOKEN}" > .tg_token
+      - echo "${GITLAB_INSTANCE}" > .gitlab_instance
+      - bash yara/setup.sh
+
+  DumprX_script:
+      - cd ${CIRRUS_WORKING_DIR}/yara
+      - ./yara/dumpyara.sh $(cat ${CIRRUS_WORKING_DIR}/ROM_URL.txt)
