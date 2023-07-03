@@ -45,8 +45,8 @@ task:
       - echo "${TG_CHAT}" > .tg_chat
       - echo "${TG_TOKEN}" > .tg_token
       - echo "${GITLAB_INSTANCE}" > .gitlab_instance
-      - bash yara/setup.sh
+      - bash setup.sh
 
   DumprX_script:
       - cd ${CIRRUS_WORKING_DIR}/yara-kit
-      - ./yara/dumpyara.sh $(cat ${CIRRUS_WORKING_DIR}/ROM_URL.txt)
+      - ./dumpyara.sh $(cat ${CIRRUS_WORKING_DIR}/ROM_URL.txt)
