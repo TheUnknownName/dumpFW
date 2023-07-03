@@ -39,7 +39,7 @@ task:
       - git config --global user.name "TUNBudi06"
       - git config --global user.email "anjaytun2006@gmail.com"
       - git config --global color.ui auto
-      - cd ${CIRRUS_WORKING_DIR}/yara
+      - cd ${CIRRUS_WORKING_DIR}/yara-kit
       - echo "${GITLAB_TOKEN}" > .gitlab_token
       - echo "${GITLAB_GROUP}" > .gitlab_group
       - echo "${TG_CHAT}" > .tg_chat
@@ -48,5 +48,5 @@ task:
       - bash yara/setup.sh
 
   DumprX_script:
-      - cd ${CIRRUS_WORKING_DIR}/yara
+      - cd ${CIRRUS_WORKING_DIR}/yara-kit
       - ./yara/dumpyara.sh $(cat ${CIRRUS_WORKING_DIR}/ROM_URL.txt)
