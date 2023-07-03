@@ -79,22 +79,22 @@ fi
 if [[ -d "$PROJECT_DIR/Firmware_extractor" ]]; then
     git -C "$PROJECT_DIR"/Firmware_extractor pull --recurse-submodules
 else
-    git clone -q --recurse-submodules https://github.com/AndroidDumps/Firmware_extractor "$PROJECT_DIR"/Firmware_extractor
+    git clone --recurse-submodules https://github.com/AndroidDumps/Firmware_extractor "$PROJECT_DIR"/Firmware_extractor
 fi
 if [[ -d "$PROJECT_DIR/mkbootimg_tools" ]]; then
     git -C "$PROJECT_DIR"/mkbootimg_tools pull --recurse-submodules
 else
-    git clone -q https://github.com/carlitros900/mkbootimg_tools "$PROJECT_DIR/mkbootimg_tools"
+    git clone https://github.com/carlitros900/mkbootimg_tools "$PROJECT_DIR/mkbootimg_tools"
 fi
 if [[ -d "$PROJECT_DIR/vmlinux-to-elf" ]]; then
     git -C "$PROJECT_DIR"/vmlinux-to-elf pull --recurse-submodules
 else
-    git clone -q https://github.com/marin-m/vmlinux-to-elf "$PROJECT_DIR/vmlinux-to-elf"
+    git clone https://github.com/marin-m/vmlinux-to-elf "$PROJECT_DIR/vmlinux-to-elf"
 fi
 
 # extract rom via Firmware_extractor
 mkdir -p "$PROJECT_DIR"/working/"${UNZIP_DIR}"
-[[ -f "$1" ]] && bash -x "$PROJECT_DIR"/Firmware_extractor/extractor.sh "$PROJECT_DIR"/input/"${FILE}" "$PROJECT_DIR"/working/"${UNZIP_DIR}"
+[ ! -d "$1" ] && bash -x "$PROJECT_DIR"/Firmware_extractor/extractor.sh "$PROJECT_DIR"/input/"${FILE}" "$PROJECT_DIR/working/${UNZIP_DIR}"
 
 # Extract boot.img
 if [[ -f "$PROJECT_DIR"/working/"${UNZIP_DIR}"/boot.img ]]; then
