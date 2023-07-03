@@ -15,8 +15,8 @@ env:
 task:
   name: "Firmware Dump by DumprX x DumpYara"
 
-  skip: $CIRRUS_BRANCH == 'main'
-  auto_cancellation: $CIRRUS_BRANCH == 'autocancel'
+  #skip: $CIRRUS_BRANCH == 'main'
+  #auto_cancellation: $CIRRUS_BRANCH == 'autocancel'
   timeout_in: 120m
   container:
       image: ghcr.io/tunbudi06/docker:arch
