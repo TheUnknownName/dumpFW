@@ -94,7 +94,7 @@ fi
 
 # extract rom via Firmware_extractor
 mkdir -p "$PROJECT_DIR"/working/"${UNZIP_DIR}"
-[[ -f "$1" ]] && bash "$PROJECT_DIR"/Firmware_extractor/extractor.sh "$PROJECT_DIR"/input/"${FILE}" "$PROJECT_DIR"/working/"${UNZIP_DIR}"
+[[ -f "$1" ]] && bash -x "$PROJECT_DIR"/Firmware_extractor/extractor.sh "$PROJECT_DIR"/input/"${FILE}" "$PROJECT_DIR"/working/"${UNZIP_DIR}"
 
 # Extract boot.img
 if [[ -f "$PROJECT_DIR"/working/"${UNZIP_DIR}"/boot.img ]]; then
