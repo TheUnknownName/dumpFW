@@ -49,4 +49,4 @@ task:
 
   DumprX_script:
       - cd ${CIRRUS_WORKING_DIR}/yara-kit
-      - ./dumpyara.sh $(cat ${CIRRUS_WORKING_DIR}/ROM_URL.txt)
+      - bash dumpyara.sh $(cat ${CIRRUS_WORKING_DIR}/ROM_URL.txt)
