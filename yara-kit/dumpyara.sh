@@ -166,7 +166,7 @@ done
 $sudo_cmd chown "$(whoami)" "$PROJECT_DIR"/working/"${UNZIP_DIR}"/./* -fR
 $sudo_cmd chmod -fR u+rwX "$PROJECT_DIR"/working/"${UNZIP_DIR}"/./*
 
-printf "\nFinal Repository Should Look Like...\n" && ls -lAog "$PROJECT_DIR"/working/"${UNZIP_DIR}""
+printf "\nFinal Repository Should Look Like...\n" && ls -lAog "$PROJECT_DIR/working/"${UNZIP_DIR}""
 
 # board-info.txt
 find "$PROJECT_DIR"/working/"${UNZIP_DIR}"/modem -type f -exec strings {} \; | grep "QC_IMAGE_VERSION_STRING=MPSS." | sed "s|QC_IMAGE_VERSION_STRING=MPSS.||g" | cut -c 4- | sed -e 's/^/require version-baseband=/' >> "$PROJECT_DIR"/working/"${UNZIP_DIR}"/board-info.txt
