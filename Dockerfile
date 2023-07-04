@@ -6,7 +6,7 @@ WORKDIR /tmp
 
 RUN apt-get -yqq update \
     && apt-get -yqq upgrade \
-    && apt-get install -y git sudo neofetch unzip apt-utils curl wget 
+    && apt-get install -y git sudo neofetch unzip apt-utils curl wget python-pip
 
 RUN wget https://dl.google.com/android/repository/platform-tools-latest-linux.zip \
     && unzip platform-tools-latest-linux.zip -d /tmp/ \
