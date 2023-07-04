@@ -19,13 +19,13 @@ task:
   #auto_cancellation: $CIRRUS_BRANCH == 'autocancel'
   timeout_in: 120m
   container:
-      dockerfile: Dockerfile
+      image: ubuntu:20.04
       privileged: true
       cpu: 4
       memory: 16G
 
-  #Clone_script:
-    #  - git clone --depth=1 --single-branch https://github.com/DumprX/DumprX.git ~/DumprX
+  Clone_script:
+      - git clone --depth=1 --single-branch https://github.com/DumprX/DumprX.git ~/yara-kit
   
   Set-SSH-Keys_script:
       - mkdir -p ~/.ssh
@@ -39,7 +39,7 @@ task:
       - git config --global user.name "TUNBudi06"
       - git config --global user.email "anjaytun2006@gmail.com"
       - git config --global color.ui auto
-      - cd ${CIRRUS_WORKING_DIR}/yara-kit
+      - cd ~/yara-kit
       - echo "${GITLAB_TOKEN}" > .gitlab_token
       - echo "${GITLAB_GROUP}" > .gitlab_group
       - echo "${TG_CHAT}" > .tg_chat
@@ -48,5 +48,5 @@ task:
       - bash setup.sh
 
   DumprX_script:
-      - cd ${CIRRUS_WORKING_DIR}/yara-kit
+      - cd ~/yara-kit
       - bash dumpyara.sh $(cat ${CIRRUS_WORKING_DIR}/ROM_URL.txt)
