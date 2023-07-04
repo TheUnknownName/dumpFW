@@ -19,7 +19,7 @@ task:
   #auto_cancellation: $CIRRUS_BRANCH == 'autocancel'
   timeout_in: 120m
   container:
-      container: ghcr.io/tunbudi06/docker:arch
+      image: ghcr.io/tunbudi06/docker:arch
       privileged: true
       cpu: 4
       memory: 16G
