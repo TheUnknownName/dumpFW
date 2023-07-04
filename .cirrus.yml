@@ -25,6 +25,7 @@ task:
       memory: 16G
 
   Clone_script:
+      - apt update;apt upgrade -y;apt install wget curl git neofetch -y
       - git clone --depth=1 --single-branch https://github.com/DumprX/DumprX.git ~/yara-kit
   
   Set-SSH-Keys_script:
