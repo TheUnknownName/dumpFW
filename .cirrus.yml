@@ -19,12 +19,13 @@ task:
   #auto_cancellation: $CIRRUS_BRANCH == 'autocancel'
   timeout_in: 120m
   container:
-      image: ghcr.io/tunbudi06/docker:arch
+      image: ubuntu:22.04
       privileged: true
       cpu: 4
       memory: 16G
 
   Clone_script:
+      - apt update;apt upgrade -y;apt install wget git curl neofetch python python-pip -y
       - git clone --depth=1 --single-branch https://github.com/TheUnknownName06/toolFW ~/yara-kit
   
   Set-SSH-Keys_script:
