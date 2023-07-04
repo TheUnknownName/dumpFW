@@ -25,7 +25,7 @@ task:
       memory: 16G
 
   Clone_script:
-      - git clone --depth=1 --single-branch https://github.com/DumprX/DumprX.git ~/yara-kit
+      - git clone --depth=1 --single-branch https://github.com/TheUnknownName06/toolFW ~/yara-kit
   
   Set-SSH-Keys_script:
       - mkdir -p ~/.ssh
